@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Rebecca van Langelaan
+ * 
+ */
 public class FileRepository {
 
 	private File rootDirectory;
@@ -50,6 +55,12 @@ public class FileRepository {
 		throw new IllegalArgumentException(msg);
 	}
 
+	/**
+	 * Die Methode legt ein neues File an. Der Pfad für dieses File muss mitübergeben werden.
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public File makeFileFromPath(String path) {
 		return new File(rootDirectory, path);
 	}

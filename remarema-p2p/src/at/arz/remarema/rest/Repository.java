@@ -19,6 +19,13 @@ import javax.ws.rs.core.StreamingOutput;
 import remarema.p2p.FileInfo;
 import remarema.p2p.FileRepository;
 
+
+/**
+ * Die Klasse <code>Repository</code> dient zum Auslesen von Files und Verzeichnissen bzw. deren Unterverzeichnissen.
+ * 
+ * @author Rebecca van Langelaan
+ * 
+ */
 public class Repository {
 
 	public String DIRECTORY = "\\\\A8600681\\!homelw\\rpci343\\Documents";
@@ -26,6 +33,11 @@ public class Repository {
 	private FileRepository repository = new FileRepository(file);
 
 
+	/**
+	 * Listet alle Files und Unterverzeichnisse auf.
+	 * 
+	 * @return
+	 */
 	@GET
 	@Produces("application/xml")
 	@Path("/filelist")
@@ -69,16 +81,30 @@ public class Repository {
 					}
 				}
 			};
+			// existiert die Datei, wird mit "ok" der Status-Code 200 zurückgegeben.
 			return Response.ok(output, MediaType.APPLICATION_OCTET_STREAM).build();
 		}
+		// Existiert die angebebene Datei nicht, wird der Status-Code 404 für "Not Found" zurückgegeben.
 		System.out.println("not found:" + currentFile);
 		return Response.status(404).entity(subdirectory).build();
 	}
 
+	/**
+	 * Diese Methode erstellt einen neuen FileInputStream und liefert diesen zurück.
+	 * 
+	 * @param file
+	 * @return FileInputStream
+	 * @throws FileNotFoundException
+	 */
 	FileInputStream createInputStream(final File file) throws FileNotFoundException {
 		return new FileInputStream(file);
 	}
 
+	/**
+	 * Die Methode <code>closeInputStream</code> dient zum Schließen eines InputStreams.
+	 * 
+	 * @param inputStream
+	 */
 	void closeInputStream(FileInputStream inputStream) {
 		try {
 			inputStream.close();

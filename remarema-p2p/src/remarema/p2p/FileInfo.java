@@ -9,8 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Die Klasse besitzt alle notwendigen Informationen zu einem File.
  * Dazu gehört der Name des Files und das Änderungsdatum. <code>directory</code> wird benötigt, um zwischen Files und
- * Verzeichnissen
- * unterscheiden zu können.
+ * Verzeichnissen unterscheiden zu können.
  * 
  * @author Rebecca van Langelaan
  * 
