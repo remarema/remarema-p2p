@@ -3,6 +3,7 @@
 	<name>remarema-p2p</name>
 	<comment></comment>
 	<projects>
+		<project>remarema-client</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
