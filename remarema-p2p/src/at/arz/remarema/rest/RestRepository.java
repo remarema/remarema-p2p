@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,17 +54,21 @@ public class RestRepository {
 	 * Listet alle Files und Unterverzeichnisse auf.
 	 * 
 	 * @return
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * 
 	 */
 	@GET
 	@Produces("application/xml")
 	@Path("/")
-	public Response listFiles() {
+	public Response listFiles() throws NoSuchAlgorithmException, IOException {
 		return listFilesFromSubdirectory("/");
 	}
 
 	@GET
 	@Path("/{subdirectory:.*}")
-	public Response listFilesFromSubdirectory(@PathParam("subdirectory") String subdirectory) {
+	public Response listFilesFromSubdirectory(@PathParam("subdirectory") String subdirectory)	throws NoSuchAlgorithmException,
+																								IOException {
 		final File currentFile = repository.makeFileFromPath(subdirectory);
 		if (currentFile.isDirectory()) {
 			return buildDirectoryResponse(subdirectory);
@@ -89,7 +94,7 @@ public class RestRepository {
 		return Response.ok(output, MediaType.APPLICATION_OCTET_STREAM).build();
 	}
 
-	private Response buildDirectoryResponse(String subdirectory) {
+	private Response buildDirectoryResponse(String subdirectory) throws NoSuchAlgorithmException, IOException {
 		List<FileInfo> x = repository.listFiles(subdirectory);
 		GenericEntity<List<FileInfo>> entity = new GenericEntity<List<FileInfo>>(x) {
 			//
@@ -129,6 +134,7 @@ public class RestRepository {
 
 			int len = inputStream.read(buffer);
 			while (len != -1) {
+
 				destination.write(buffer, 0, len);
 				len = inputStream.read(buffer);
 			}
