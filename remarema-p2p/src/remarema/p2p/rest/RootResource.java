@@ -1,4 +1,4 @@
-package at.arz.remarema.rest;
+package remarema.p2p.rest;
 
 import javax.ws.rs.Path;
 
