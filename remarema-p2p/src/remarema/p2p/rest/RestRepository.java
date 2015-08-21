@@ -32,7 +32,7 @@ import remarema.client.filerepository.FileRepository;
 public class RestRepository {
 
 	private static final Logger log = Logger.getLogger("RestRepository");
-	public String DIRECTORY = "C:\\Users\\rpci343\\server_testordner";
+	public String DIRECTORY = "C:\\Users\\Rebecca vanLangelaan\\Desktop\\ARZ\\Server";
 	File file = new File(DIRECTORY);
 	private FileRepository repository = new FileRepository(file);
 	private String hostName;
